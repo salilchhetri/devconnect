@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 const users = require('./routes/api/user.js');
+const passport = require('passport');
 
 //Connect to DB
 const db = keys.mongoURI;
@@ -17,6 +18,12 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
 
 
 // App running notification
